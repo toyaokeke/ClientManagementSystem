@@ -6,4 +6,4 @@ A simple client management system using a client-server architecture and MVC mod
 
 ## 2.CMS-JDBC (Toya Okeke and Charles Chukwukaeme)
 
-A client mgmt system using the JDBC API endpoint
+A client mgmt system using the JDBC API
