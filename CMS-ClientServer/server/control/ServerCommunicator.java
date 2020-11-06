@@ -1,4 +1,4 @@
-package Ex6Task2Files.server.control;
+package server.control;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import Ex6Task2Files.server.model.ServerDatabase;
+import server.model.ServerDatabase;
 
 public class ServerCommunicator {
     private ServerSocket serverSocket;
@@ -18,11 +18,13 @@ public class ServerCommunicator {
     private ServerDatabase serverDB;
 
     /**
-     * Default constructor of server that is initialized with port and server database
-     * @param port port number
+     * Default constructor of server that is initialized with port and server
+     * database
+     * 
+     * @param port     port number
      * @param serverDB database
      */
-    public ServerCommunicator(int port, ServerDatabase serverDB){
+    public ServerCommunicator(int port, ServerDatabase serverDB) {
         try {
             this.port = port;
             serverSocket = new ServerSocket(this.port);
@@ -35,37 +37,38 @@ public class ServerCommunicator {
     }
 
     /**
-     * This accepts connection from clients to the server and creates
-     * a runnable instance of their connection to the server
+     * This accepts connection from clients to the server and creates a runnable
+     * instance of their connection to the server
      */
-    public void acceptConnections(){
-    	while(true) {
-    		try{
-    			clientSocket = serverSocket.accept();
-    			System.out.println("A client has connected to the Client Management System.");
-    			openStreams();
-    			ServerInstance si = new ServerInstance(socketIn, socketOut, serverDB);
-    			runServer(si);
-    		} catch (IOException e) {
-    			System.err.println("Unable to establish connection...");
-    			e.printStackTrace();
-    		}
-    	}
+    public void acceptConnections() {
+        while (true) {
+            try {
+                clientSocket = serverSocket.accept();
+                System.out.println("A client has connected to the Client Management System.");
+                openStreams();
+                ServerInstance si = new ServerInstance(socketIn, socketOut, serverDB);
+                runServer(si);
+            } catch (IOException e) {
+                System.err.println("Unable to establish connection...");
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
      * runs server instance in the threadpool
+     * 
      * @param server server instance
      */
-    public void runServer(ServerInstance server){
+    public void runServer(ServerInstance server) {
         pool.execute(server);
     }
 
     /**
      * Opens IO streams of the client to the server
      */
-    private void openStreams(){
-        try{
+    private void openStreams() {
+        try {
             socketOut = new ObjectOutputStream(clientSocket.getOutputStream());
             socketIn = new ObjectInputStream(clientSocket.getInputStream());
         } catch (IOException e) {
@@ -73,11 +76,11 @@ public class ServerCommunicator {
             e.printStackTrace();
         }
     }
-    
+
     public static void main(String[] args) {
-    	ServerDatabase sdb = new ServerDatabase();
-    	sdb.createTableFromFile("clients.txt");
-    	ServerCommunicator sc = new ServerCommunicator(9999, sdb);
-    	sc.acceptConnections();
+        ServerDatabase sdb = new ServerDatabase();
+        sdb.createTableFromFile("clients.txt");
+        ServerCommunicator sc = new ServerCommunicator(9999, sdb);
+        sc.acceptConnections();
     }
 }

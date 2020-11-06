@@ -1,4 +1,4 @@
-package Ex6Task2Files.client.view;
+package client.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,142 +8,150 @@ import java.awt.event.WindowListener;
 
 public class ClientGUI extends JFrame {
 
-	private JPanel northPanel, eastPanel, westPanel, westTopPanel, westBotPanel, wtpBot, centerPanel, southPanel, panelLabel;
-	private JPanel ep1, ep2, ep3, ep4, ep5, ep6, ep7, ep8;
-	private JLabel el1, el2, el3, el4, el5, el6, el7;
-	public JTextField et1, et2, et3, et4, et5, et6;
-	private JLabel heading, westTopPanelLabel, searchText, searchPar, searchResultText, eastLabel, footer;
-	public JRadioButton clientId;
-	public JRadioButton lastName;
-	public JRadioButton clientType;
-	private Container ctn;
-	private BorderLayout mainLayout, westLayout;
-	private BoxLayout wtp, eastLayout;
-	private FlowLayout wtpBptLayout;
-	public JTextField searchBox;
-	public JButton searchButton, clearSearch, eb1, eb2, eb3, eb4;
-	public JList textArea;
-	private JScrollPane scrollWindow;
-	public JComboBox dropDown;
-	private String [] dropDownList = {" ", "R", "C"};
-	private ButtonGroup group;
-	private Font font, southFont;
+    private JPanel northPanel, eastPanel, westPanel, westTopPanel, westBotPanel, wtpBot, centerPanel, southPanel,
+            panelLabel;
+    private JPanel ep1, ep2, ep3, ep4, ep5, ep6, ep7, ep8;
+    private JLabel el1, el2, el3, el4, el5, el6, el7;
+    public JTextField et1, et2, et3, et4, et5, et6;
+    private JLabel heading, westTopPanelLabel, searchText, searchPar, searchResultText, eastLabel, footer;
+    public JRadioButton clientId;
+    public JRadioButton lastName;
+    public JRadioButton clientType;
+    private Container ctn;
+    private BorderLayout mainLayout, westLayout;
+    private BoxLayout wtp, eastLayout;
+    private FlowLayout wtpBptLayout;
+    public JTextField searchBox;
+    public JButton searchButton, clearSearch, eb1, eb2, eb3, eb4;
+    public JList textArea;
+    private JScrollPane scrollWindow;
+    public JComboBox dropDown;
+    private String[] dropDownList = { " ", "R", "C" };
+    private ButtonGroup group;
+    private Font font, southFont;
 
-	/**
+    /**
      * Create the frame.
-	 */
-	public ClientGUI() {
-		/*
-		 Creating the view of the main frame
-		 */
-		createMainFrame();
+     */
+    public ClientGUI() {
+        /*
+         * Creating the view of the main frame
+         */
+        createMainFrame();
 
-		/*
-		 This creates the label for the frame
-		 */
-		createFrameLabel();
+        /*
+         * This creates the label for the frame
+         */
+        createFrameLabel();
 
-		/*
-		 This creates the West Panel
-		 */
+        /*
+         * This creates the West Panel
+         */
         createWestPanel();
 
-		/*
-		 This builds the upper west layout
-		 */
+        /*
+         * This builds the upper west layout
+         */
         buildWestLayout();
 
-		/*
-		 Building the east panel
-		 */
+        /*
+         * Building the east panel
+         */
         buildEastPanel();
-		/*
-		Building south panel
-		 */
-		buildSouthPanel();
+        /*
+         * Building south panel
+         */
+        buildSouthPanel();
 
-		/*
-		Building center panel
-		 */
+        /*
+         * Building center panel
+         */
         buildCenterPanel();
 
-		/*
-		 Adding the panels to the Main frame
-		 */
+        /*
+         * Adding the panels to the Main frame
+         */
         addToMain();
 
-		setVisible(true);
-	}
+        setVisible(true);
+    }
 
     /**
      * Registers an ActionListener to the Client ID radio button
+     * 
      * @param ac ActionListener
      */
-	public void registerRadioButtonListener1 (ActionListener ac){
-		clientId.addActionListener(ac);
-		
-	}
+    public void registerRadioButtonListener1(ActionListener ac) {
+        clientId.addActionListener(ac);
+
+    }
 
     /**
      * Registers an ActionListener to the Last Name radio button
+     * 
      * @param ac ActionListener
      */
-	public void registerRadioButtonListener2(ActionListener ac){
-		lastName.addActionListener(ac);
-		
-	}
+    public void registerRadioButtonListener2(ActionListener ac) {
+        lastName.addActionListener(ac);
+
+    }
 
     /**
      * Registers an ActionListener to the Client Type radio button
+     * 
      * @param ac ActionListener
      */
-    public void registerRadioButtonListener3 (ActionListener ac){
-		clientType.addActionListener(ac);
-	}
+    public void registerRadioButtonListener3(ActionListener ac) {
+        clientType.addActionListener(ac);
+    }
 
     /**
      * Registers an ActionListener to the Search and Clear Search buttons
+     * 
      * @param ac ActionListener
      */
     public void registerSearchListener(ActionListener ac) {
-		searchButton.addActionListener(ac);
-		clearSearch.addActionListener(ac);
-	}
+        searchButton.addActionListener(ac);
+        clearSearch.addActionListener(ac);
+    }
 
     /**
      * Adds a MouseListener to the JTextArea of search results
+     * 
      * @param ac MouseListener
      */
-	public void registerTextAreaListener(MouseListener ac) {
-		textArea.addMouseListener(ac);
-	}
+    public void registerTextAreaListener(MouseListener ac) {
+        textArea.addMouseListener(ac);
+    }
 
     /**
      * Adds an ActionListener to the buttons for Client information
+     * 
      * @param ac ActionListener
      */
     public void registerModifyListeners(ActionListener ac) {
-		eb1.addActionListener(ac);
-		eb2.addActionListener(ac);
-		eb3.addActionListener(ac);
-		eb4.addActionListener(ac);
-	}
+        eb1.addActionListener(ac);
+        eb2.addActionListener(ac);
+        eb3.addActionListener(ac);
+        eb4.addActionListener(ac);
+    }
 
     /**
      * Adds a WindowListener to the GUI
+     * 
      * @param ac WindowListener
      */
-    public void closeWIndow (WindowListener ac) {
-		this.addWindowListener(ac);
-	}
+    public void closeWIndow(WindowListener ac) {
+        this.addWindowListener(ac);
+    }
 
     /**
      * Creates the initial frame
      */
-	private void createMainFrame(){
+    private void createMainFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(200, 200, 800, 600);
-        mainLayout = new BorderLayout(7,7);
+        mainLayout = new BorderLayout(7, 7);
         setLayout(mainLayout);
         ctn = new Container();
         ctn = getContentPane();
@@ -153,11 +161,11 @@ public class ClientGUI extends JFrame {
     /**
      * Creates the heading for the Client Management System GUI
      */
-    private  void createFrameLabel(){
+    private void createFrameLabel() {
         northPanel = new JPanel();
-        heading = new JLabel ("Client Management System");
+        heading = new JLabel("Client Management System");
         font = new Font("Serif", Font.BOLD, 22);
-        //font.deriveFont(font.getStyle() ^ Font.BOLD);
+        // font.deriveFont(font.getStyle() ^ Font.BOLD);
         heading.setFont(font);
         heading.setForeground(Color.WHITE);
         northPanel.add(heading);
@@ -167,7 +175,7 @@ public class ClientGUI extends JFrame {
     /**
      * Creates the west panel of the GUI which contains the search clients portion
      */
-    private void createWestPanel(){
+    private void createWestPanel() {
         westPanel = new JPanel();
         westTopPanel = new JPanel();
         westBotPanel = new JPanel();
@@ -175,13 +183,13 @@ public class ClientGUI extends JFrame {
         panelLabel = new JPanel();
         westTopPanelLabel = new JLabel("Search Clients");
         westTopPanelLabel.setForeground(Color.WHITE);
-        //westTopPanelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // westTopPanelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelLabel.add(westTopPanelLabel);
-        //westTopPanelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // westTopPanelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelLabel.setBackground(Color.DARK_GRAY);
 
         searchText = new JLabel("Select type of search to be performed:");
-        searchPar = new JLabel ("Enter the search parameter below:");
+        searchPar = new JLabel("Enter the search parameter below:");
 
         clientId = new JRadioButton("Client ID");
         lastName = new JRadioButton("Last Name");
@@ -193,18 +201,17 @@ public class ClientGUI extends JFrame {
         westLayout = new BorderLayout();
         wtp = new BoxLayout(westTopPanel, BoxLayout.PAGE_AXIS);
 
-
         wtpBot.setLayout(new FlowLayout());
         searchBox = new JTextField();
-        searchBox.setPreferredSize( new Dimension(100, 24));
+        searchBox.setPreferredSize(new Dimension(100, 24));
         searchButton = new JButton("Search");
         clearSearch = new JButton("Clear Search");
 
-        //wtpBot.add(Box.createRigidArea(new Dimension(50,0)));
+        // wtpBot.add(Box.createRigidArea(new Dimension(50,0)));
         wtpBot.add(searchBox);
-        //wtpBot.add(Box.createRigidArea(new Dimension(10,0)));
+        // wtpBot.add(Box.createRigidArea(new Dimension(10,0)));
         wtpBot.add(searchButton);
-//		wtpBot.add(Box.createRigidArea(new Dimension(10,0)));
+        // wtpBot.add(Box.createRigidArea(new Dimension(10,0)));
         wtpBot.add(clearSearch);
         wtpBot.setBackground(Color.DARK_GRAY);
     }
@@ -212,39 +219,38 @@ public class ClientGUI extends JFrame {
     /**
      * Creates the internal components of the west panel of the GUI.
      */
-    private void buildWestLayout(){
+    private void buildWestLayout() {
         westTopPanel.setBackground(Color.GRAY);
         westTopPanel.setLayout(wtp);
 
         westTopPanel.add(panelLabel);
-        //westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        //searchText.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        // westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        // searchText.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         westTopPanel.add(searchText);
-        //searchText.setAlignmentY(Component.LEFT_ALIGNMENT);
-        westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        // searchText.setAlignmentY(Component.LEFT_ALIGNMENT);
+        westTopPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         westTopPanel.add(clientId);
-        westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        westTopPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         westTopPanel.add(lastName);
-        westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        westTopPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         westTopPanel.add(clientType);
-        westTopPanel.add(Box.createRigidArea(new Dimension(0,50)));
+        westTopPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         westTopPanel.add(searchPar);
-        westTopPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        //westTopPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        westTopPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // westTopPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         westTopPanel.add(wtpBot);
 
         westBotPanel.setLayout(new BoxLayout(westBotPanel, BoxLayout.Y_AXIS));
 
-
-        //addText = new DefaultListModel();
+        // addText = new DefaultListModel();
         textArea = new JList();
-        //textArea.setEditable(false);
-        //textArea.setPreferredSize(new Dimension(250,250));
-        //textArea.setLineWrap(true);
-        //textArea.setWrapStyleWord(true);
+        // textArea.setEditable(false);
+        // textArea.setPreferredSize(new Dimension(250,250));
+        // textArea.setLineWrap(true);
+        // textArea.setWrapStyleWord(true);
         scrollWindow = new JScrollPane(textArea);
         scrollWindow.setPreferredSize(new Dimension(10, 190));
-        //scrollWindow.setViewportView(textArea);
+        // scrollWindow.setViewportView(textArea);
         searchResultText = new JLabel("Search Results");
         searchResultText.setForeground(Color.WHITE);
 
@@ -260,7 +266,7 @@ public class ClientGUI extends JFrame {
     /**
      * Creates the east panel of the GUI which contains the client information
      */
-    private void buildEastPanel(){
+    private void buildEastPanel() {
         ep1 = new JPanel();
         el1 = new JLabel("Client ID:");
         et1 = new JTextField(10);
@@ -343,9 +349,9 @@ public class ClientGUI extends JFrame {
         eastPanel.setBackground(Color.DARK_GRAY);
         eastPanel.setLayout(eastLayout);
         eastPanel.add(eastLabel);
-        //eastPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        // eastPanel.add(Box.createRigidArea(new Dimension(0,10)));
         eastPanel.add(ep1);
-        //eastPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        // eastPanel.add(Box.createRigidArea(new Dimension(0,10)));
         eastPanel.add(ep2);
         eastPanel.add(ep3);
         eastPanel.add(ep4);
@@ -358,22 +364,22 @@ public class ClientGUI extends JFrame {
     /**
      * Creates the footer of the GUI
      */
-    private void buildSouthPanel(){
+    private void buildSouthPanel() {
         southPanel = new JPanel();
-        footer = new JLabel ("Client Management System");
+        footer = new JLabel("Client Management System");
         southFont = new Font("Serif", Font.BOLD, 22);
-        //font.deriveFont(font.getStyle() ^ Font.BOLD);
+        // font.deriveFont(font.getStyle() ^ Font.BOLD);
         footer.setFont(southFont);
         footer.setForeground(Color.WHITE);
         southPanel.add(footer);
         southPanel.setBackground(Color.DARK_GRAY);
-        //southPanel.add(heading);
+        // southPanel.add(heading);
     }
 
     /**
      * Builds the central panel of the GUI
      */
-    private void buildCenterPanel(){
+    private void buildCenterPanel() {
         centerPanel = new JPanel();
         centerPanel.setMaximumSize(new Dimension(100, 100));
         centerPanel.setBackground(Color.BLACK);
@@ -382,41 +388,46 @@ public class ClientGUI extends JFrame {
     /**
      * Inserts all panels into the main frame
      */
-    private void addToMain(){
+    private void addToMain() {
         ctn.add(northPanel, BorderLayout.NORTH);
         ctn.add(westPanel, BorderLayout.CENTER);
         ctn.add(eastPanel, BorderLayout.EAST);
-        //ctn.add(centerPanel, BorderLayout.WEST);
+        // ctn.add(centerPanel, BorderLayout.WEST);
         ctn.add(southPanel, BorderLayout.SOUTH);
     }
 
     /**
-     * This requests the user to enter the IP address of the server they wish to connect to.
-     * If the return from the user is null or an empty String, the default return type will be localhost
+     * This requests the user to enter the IP address of the server they wish to
+     * connect to. If the return from the user is null or an empty String, the
+     * default return type will be localhost
+     * 
      * @return server IP address
      */
-	public String pollForServerAddress() {
-		String serverAddress = JOptionPane.showInputDialog("Please enter the server IP address, or leave it blank for 'localhost'.");
-		if(serverAddress == null || serverAddress.equals(""))
-			serverAddress = "localhost";
-		
-		return serverAddress;
-	}
+    public String pollForServerAddress() {
+        String serverAddress = JOptionPane
+                .showInputDialog("Please enter the server IP address, or leave it blank for 'localhost'.");
+        if (serverAddress == null || serverAddress.equals(""))
+            serverAddress = "localhost";
+
+        return serverAddress;
+    }
 
     /**
-     * Displays a successful confirmation of a user specified operation for a Client in the system.
-     * Operation could be ADD, DELETE, or MODIFY
+     * Displays a successful confirmation of a user specified operation for a Client
+     * in the system. Operation could be ADD, DELETE, or MODIFY
+     * 
      * @param operation Operation
-     * @param newID Client ID
+     * @param newID     Client ID
      */
-	public void displayConfirmationDialog(String operation, int newID) {
-		JOptionPane.showMessageDialog(null, operation + " of client successful, ID number: " + newID + ".");
-	}
+    public void displayConfirmationDialog(String operation, int newID) {
+        JOptionPane.showMessageDialog(null, operation + " of client successful, ID number: " + newID + ".");
+    }
 
     /**
-     * Displays an error message if system is unable to perform the user specified operation
+     * Displays an error message if system is unable to perform the user specified
+     * operation
      */
-	public void displayFailDialog() {
-		JOptionPane.showMessageDialog(null, "Failed to perform operation.", "Error", JOptionPane.ERROR_MESSAGE);
-	}
+    public void displayFailDialog() {
+        JOptionPane.showMessageDialog(null, "Failed to perform operation.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
